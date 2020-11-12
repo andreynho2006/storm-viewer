@@ -28,7 +28,7 @@ class ViewController: UITableViewController {
             }
                
         }
-        
+        pictures = pictures.sorted()
         //print(pictures)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
@@ -40,14 +40,16 @@ class ViewController: UITableViewController {
         //print(pictures[indexPath.row])
         //print(indexPath)
         cell.textLabel?.text = pictures[indexPath.row]
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 16.0)
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //check storyboard iftrue and the type of the identifier
+        //check storyboard if true and the type of the identifier
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            vc.title = "Picture \(indexPath.row + 1) of \(pictures.count)"
             navigationController?.pushViewController(vc, animated: true)
         }
     }
